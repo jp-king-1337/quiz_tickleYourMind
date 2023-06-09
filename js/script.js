@@ -24,10 +24,16 @@ function showChoices() {
 
     // loop over questionDataObj and generate button for each choice string
     for (i = 0; i < questionDataObj.choices.length; i++) {
+        var choiceStr = questionDataObj.choices;
+        var btn = document.createElement("button");
 
+        // button text must be choiceStr and button must be added to div
+        btn.innerText = choiceStr[i];
+        questionChoicesEl.append(btn);
     }
 }
 
 
 
 showQuestion();
+showChoices();
