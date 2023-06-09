@@ -15,3 +15,9 @@ function showQuestion() {
     questionH2.innerText = questionObj.question;
     questionEl.append(questionH2);
 }
+
+
+
+
+
+showQuestion();
