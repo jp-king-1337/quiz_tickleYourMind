@@ -17,7 +17,6 @@ function showQuestion() {
 }
 
 // Function to show the choices in buttons.
-// trying a new approach to make the buttons appear as a list
 function showChoices() {
     var questionChoicesEl = document.querySelector("#choices");
     questionChoicesEl.innerHTML = "";
