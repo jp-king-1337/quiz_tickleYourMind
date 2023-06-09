@@ -22,7 +22,10 @@ function showChoices() {
     questionChoicesEl.innerHTML = "";
     var questionDataObj = questionData[currentQuestionIndex];
 
-    // loop over questionDataObj
+    // loop over questionDataObj and generate button for each choice string
+    for (i = 0; i < questionDataObj.choices.length; i++) {
+
+    }
 }
 
 
