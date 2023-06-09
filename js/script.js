@@ -22,19 +22,25 @@ function showChoices() {
     var questionChoicesEl = document.querySelector("#choices");
     questionChoicesEl.innerHTML = "";
     var questionDataObj = questionData[currentQuestionIndex];
-
-    var choicesList = document.createElement("ul");
-
-    // loop over questionDataObj and generate button for each choice string
-    for (i = 0; i < questionDataObj.choices.length; i++) {
-        var choice = questionDataObj.choices;
-        var btn = document.createElement("button");
-
-        // button text must be choiceStr and button must be added to div
-        btn.innerText = choiceStr[i];
-        questionChoicesEl.append(btn);
+  
+    var choicesList = document.createElement("ol");
+  
+    for (var i = 0; i < questionDataObj.choices.length; i++) {
+      var choice = questionDataObj.choices[i];
+  
+      var listItem = document.createElement("li");
+      var btn = document.createElement("button");
+  
+      btn.innerText = choice;
+  
+      listItem.appendChild(btn);
+      choicesList.appendChild(listItem);
     }
-}
+  
+    questionChoicesEl.innerHTML = "";
+    questionChoicesEl.appendChild(choicesList);
+  }
+  
 
 
 
