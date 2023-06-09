@@ -7,16 +7,23 @@ function showQuestion() {
     // reset innerHTML
     questionEl.innerHTML = "";
     // variable to select the current object from the questionData array
-    var questionObj = questionData[currentQuestionIndex];
+    var questionDataObj = questionData[currentQuestionIndex];
     // create the h2 to hold the question
     var questionH2 = document.createElement("h2");
 
-    // h2 text should pull from questionObj and append to the questionEl
-    questionH2.innerText = questionObj.question;
+    // h2 text should pull from questionDataObj and append to the questionEl
+    questionH2.innerText = questionDataObj.question;
     questionEl.append(questionH2);
 }
 
+// Function to show the choices in buttons.
+function showChoices() {
+    var questionChoicesEl = document.querySelector("#choices");
+    questionChoicesEl.innerHTML = "";
+    var questionDataObj = questionData[currentQuestionIndex];
 
+    // loop over questionDataObj
+}
 
 
 
