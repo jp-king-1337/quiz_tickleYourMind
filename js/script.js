@@ -23,30 +23,17 @@ function showChoices() {
     questionChoicesEl.innerHTML = "";
     var questionDataObj = questionData[currentQuestionIndex];
 
-    var choicesList = document.createElement("ol");
+    var choicesList = document.createElement("ul");
 
     // loop over questionDataObj and generate button for each choice string
     for (i = 0; i < questionDataObj.choices.length; i++) {
-        // no string - individual choice now
-        var choice = questionDataObj.choices[i];
-
-        var listItem = document.createElement("li");
+        var choice = questionDataObj.choices;
         var btn = document.createElement("button");
 
         // button text must be choiceStr and button must be added to div
-        btn.innerText = choice;
-
-        // this should put the li element inside the button instead of the button inside the li
-        btn.appendChild(listItem);
-        // and the li text as numbering
-        // listItem.innerText = `${i + 1}.`;
-
-        choicesList.appendChild(btn);
-
+        btn.innerText = choiceStr[i];
+        questionChoicesEl.append(btn);
     }
-
-    questionChoicesEl.innerHTML = "";
-    questionChoicesEl.appendChild(choicesList)
 }
 
 
