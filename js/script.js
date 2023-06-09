@@ -36,9 +36,13 @@ function showChoices() {
         // button text must be choiceStr and button must be added to div
         btn.innerText = choice;
 
-        listItem.appendChild(btn);
-        choicesList.appendChild(listItem);
-        // questionChoicesEl.append(btn);
+        // this should put the li element inside the button instead of the button inside the li
+        btn.appendChild(listItem);
+        // and the li text as numbering
+        // listItem.innerText = `${i + 1}.`;
+
+        choicesList.appendChild(btn);
+
     }
 
     questionChoicesEl.innerHTML = "";
