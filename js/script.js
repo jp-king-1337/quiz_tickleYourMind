@@ -119,6 +119,8 @@ function applyButtonStyle() {
 }
 
 
+// STOP REMOVING THE SUBMIT BUTTON YOU DUMMY
+// It's there to submit score info, not to end the quiz.
 function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
@@ -130,11 +132,13 @@ function endQuiz() {
     var submitButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
-    scoreText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
+    scoreText.innerText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Name");
+    submitButton.textContent = "Submit"
+    submitButton.addEventListener("click", saveScore);
 
-    resultDiv.append(scoreText, nameInput);
+    resultDiv.append(scoreText, nameInput, submitButton);
     quizDescription.append(resultDiv);
 }
 
