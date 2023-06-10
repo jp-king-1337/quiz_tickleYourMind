@@ -1,14 +1,4 @@
 /* GLOBAL CLASSES */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* vh is viewport height, a percentage of the height of the viewport */
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
 .text_center {
     text-align: center;
 }
