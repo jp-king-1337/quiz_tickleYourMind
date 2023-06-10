@@ -1,16 +1,23 @@
 var currentQuestionIndex = 0;
 var startButton = document.getElementById("startButton");
+var quizDescription = document.getElementById("quizDescription");
 var questionWrap = document.getElementById("question_wrap");
 var nextButton = document.getElementById("nextButton");
 
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", nextQuestion);
 
+questionWrap.style.display = "none";
+nextButton.style.display = "none";
 
 
 function startQuiz() {
+    quizDescription.style.display = "none";
     startButton.style.display = "none";
+
     questionWrap.style.display = "block";
+    nextButton.style.display = "block";
+    
     showQuestion();
     showChoices();
 }
