@@ -105,8 +105,23 @@ function endQuiz() {
     questionWrap.style.display = "none";
     nextButton.style.display = "none";
 
+    var resultDiv = document.createElement("div");
+    var scoreText = document.createElement("p");
+    var nameInput = document.createElement("input");
 
+    resultDiv.classList.add("text_center");
+    scoreText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
+    nameInput.setAttribute("type", "text");
+    nameInput.setAttribute("placeholder", "Enter Your Name");
+    submitButton.innerText = "Submit";
+    submitButton.addEventListener("click", saveScore);
+
+    resultDiv.append(scoreText, nameInput, submitButton);
+    quizDescription.append(resultDiv);
 }
+
+
+
 
 
 showQuestion();
