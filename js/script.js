@@ -4,6 +4,7 @@ var quizDescription = document.getElementById("quizDescription");
 var questionWrap = document.getElementById("question_wrap");
 var highScoresButton = document.getElementById("highScoresButton");
 var timerEl = document.getElementById("timer");
+var nameInput;
 var timerInterval;
 var score = 0;
 
@@ -121,9 +122,12 @@ function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
 
+    var scoreboardDiv = document.getElementById("scoreboard");
+    scoreboardDiv.innerHTML = "";
+
     var resultDiv = document.createElement("div");
     var scoreText = document.createElement("p");
-    var nameInput = document.createElement("input");
+    nameInput = document.createElement("input");
     var submitButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
@@ -134,7 +138,7 @@ function endQuiz() {
     submitButton.addEventListener("click", saveScore);
 
     resultDiv.append(scoreText, nameInput, submitButton);
-    quizDescription.append(resultDiv);
+    scoreboardDiv.append(resultDiv);
 }
 
 
