@@ -2,19 +2,17 @@ var currentQuestionIndex = 0;
 var startButton = document.getElementById("startButton");
 var quizDescription = document.getElementById("quizDescription");
 var questionWrap = document.getElementById("question_wrap");
-var nextButton = document.getElementById("nextButton");
 var highScoresButton = document.getElementById("highScoresButton");
 var timerEl = document.getElementById("timer");
+var nameInput;
 var timerInterval;
 var score = 0;
 
 
 
 startButton.addEventListener("click", startQuiz);
-nextButton.addEventListener("click", nextQuestion);
 
 questionWrap.style.display = "none";
-nextButton.style.display = "none";
 
 
 function startQuiz() {
@@ -22,7 +20,6 @@ function startQuiz() {
     startButton.style.display = "none";
 
     questionWrap.style.display = "block";
-    nextButton.style.display = "block";
 
     startTimer();
     showQuestion();
@@ -98,19 +95,39 @@ function showChoices() {
 
 
 function checkAnswer(event) {
-    var selectedChoice = event.target.innerText;
+    var selectedChoice = event.target;
     var questionDataObj = questionData[currentQuestionIndex];
 
-    if (selectedChoice === questionDataObj.answer) {
+    if (selectedChoice.innerText === questionDataObj.answer) {
         score++;
+        selectedChoice.className += " correct";
+        showResult(selectedChoice, true);
     } else {
         var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
         timeLeft -= 5;
         timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
+        selectedChoice.className += " wrong";
+        showResult(selectedChoice, false);
     }
 
     nextQuestion();
 }
+
+function showResult(selectedChoice, isCorrect) {
+    var resultDiv = document.createElement("div");
+    var resultText = document.createElement("p");
+
+    resultDiv.classList.add("text_center");
+    resultText.innerText = isCorrect ? "Correct!" : "Wrong!";
+
+    resultDiv.appendChild(resultText);
+    questionWrap.appendChild(resultDiv);
+
+    setTimeout(function () {
+        resultDiv.remove();
+    }, 1000);
+}
+
 
 
 function applyButtonStyle() {
@@ -119,36 +136,49 @@ function applyButtonStyle() {
 }
 
 
+var scoreboardDiv = document.createElement("div");
+scoreboardDiv.id = "scoreboard";
+scoreboardDiv.classList.add("text_center");
+document.body.appendChild(scoreboardDiv);
+
+
 // STOP REMOVING THE SUBMIT BUTTON YOU DUMMY
 // It's there to submit score info, not to end the quiz.
 function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
-    nextButton.style.display = "none";
+
+    scoreboardDiv.innerHTML = "";
 
     var resultDiv = document.createElement("div");
     var scoreText = document.createElement("p");
-    var nameInput = document.createElement("input");
+    nameInput = document.createElement("input");
     var submitButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
     scoreText.innerText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
-    nameInput.setAttribute("placeholder", "Enter Your Name");
+    nameInput.setAttribute("placeholder", "Enter Your Initials");
     submitButton.textContent = "Submit"
     submitButton.addEventListener("click", saveScore);
 
     resultDiv.append(scoreText, nameInput, submitButton);
-    quizDescription.append(resultDiv);
+    scoreboardDiv.append(resultDiv);
+
+    nameInput.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            saveScore();
+        }
+    });
 }
 
 
 function saveScore() {
-    var nameInput = document.querySelector("input[type='text']");
-    var initials = nameInput.ariaValueMax;
-    var score = currentQuestionIndex;
-
-    var scoreObj = { initials: initials, score: score };
+    var initials = nameInput.value;
+    var scoreObj = {
+        initials: initials,
+        score: score
+    };
 
     var scores = localStorage.getItem("scores");
     var scoreList;
@@ -159,11 +189,14 @@ function saveScore() {
         scoreList = [];
     }
 
-    scoreList.push(newScore);
+    scoreList.push(scoreObj);
 
     localStorage.setItem("scores", JSON.stringify(scoreList));
 
+    nameInput.value = "";
 }
+
+
 
 
 showQuestion();
