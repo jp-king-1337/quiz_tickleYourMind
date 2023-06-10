@@ -140,9 +140,6 @@ function endQuiz() {
 
 function saveScore() {
     var initials = nameInput.value;
-    // keep forgetting how this object literal works, so making note:
-    // scoreObj is making a new object for the scores - then before colon setting the labels to store in the object as initials and score - then after colon adding value to the labels
-    // { property: value }
     var scoreObj = {
         initials: initials,
         score: score
