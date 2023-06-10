@@ -10,6 +10,7 @@ var score = 0;
 var timeLeft = 60;
 
 
+
 startButton.addEventListener("click", startQuiz);
 highScoresButton.addEventListener("click", showHighScores);
 questionWrap.style.display = "none";
@@ -82,7 +83,7 @@ function showChoices() {
         var btn = document.createElement("button");
 
         btn.innerText = choice;
-        btn.classList.add("button-style");
+        btn.classList.add("button_style");
         btn.addEventListener("click", checkAnswer);
 
         listItem.appendChild(btn);
@@ -136,7 +137,7 @@ function showResult(selectedChoice, isCorrect) {
 
 function applyButtonStyle() {
     var startButton = document.getElementById("startButton");
-    startButton.classList.add("button-style");
+    startButton.classList.add("button_style");
 }
 
 
@@ -163,7 +164,8 @@ function endQuiz() {
     scoreText.innerText = "Time's up! Your final score is: " + score + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Initials");
-    submitButton.innerText = "Submit"
+    submitButton.innerText = "Submit";
+    submitButton.classList.add("standard_button");
     submitButton.addEventListener("click", saveScore);
 
     resultDiv.append(scoreText, nameInput, submitButton);
@@ -188,7 +190,7 @@ function playAgain() {
     timeLeft = 60;
     scoreboardDiv.style.display = "none";
     questionWrap.style.display = "block";
-    
+
     var playAgainButton = document.getElementById("playAgainButton");
     if (playAgainButton) {
         playAgainButton.remove();
@@ -226,6 +228,8 @@ function saveScore() {
         playAgainButton = document.createElement("button");
         playAgainButton.id = "playAgainButton";
         playAgainButton.innerText = "PLAY AGAIN";
+        playAgainButton.classList.add("button_style");
+        playAgainButton.classList.add("centered_button");
         playAgainButton.addEventListener("click", playAgain);
         document.body.append(playAgainButton)
     }
@@ -270,8 +274,32 @@ function showHighScores() {
 }
 
 
+function setButtonStandardStyling() {
+    var buttons = document.getElementsByTagName("button");
+
+    for (var i = 0; i < buttons.length; i++) {
+        var button = buttons[i];
+
+        if (button.id !== "highScoresButton") {
+            button.classList.add("standard_button");
+        }
+    }
+}
+
+function setChoicesButtonStyling() {
+    var listItems = document.querySelectorAll("li");
+
+    for (var i = 0; i < listItems.length; i++) {
+        var listItem = listItems[i];
+        var button = listItem.querySelector("button");
+
+        button.classList.add("choice_button");
+    }
+}
 
 
 showQuestion();
 showChoices();
 applyButtonStyle();
+setButtonStandardStyling();
+setChoicesButtonStyling();
