@@ -11,7 +11,8 @@
     margin: 10px;
 }
 
-.button-style {
+.button-style,
+#startButton {
     width: 50%;
     background-color: #301934;
     color: #fff;

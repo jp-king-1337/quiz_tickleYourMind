@@ -7,6 +7,7 @@ startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", nextQuestion);
 
 
+
 function startQuiz() {
     startButton.style.display = "none";
     questionWrap.style.display = "block";
