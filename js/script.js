@@ -1,4 +1,19 @@
 var currentQuestionIndex = 0;
+var startButton = document.getElementById("startButton");
+var questionWrap = document.getElementById("question_wrap");
+var nextButton = document.getElementById("nextButton");
+
+startButton.addEventListener("click", startQuiz);
+nextButton.addEventListener("click", nextQuestion);
+
+
+// Gonna remove the start button, keep the questionWrap, and show the question and choices when start quiz button is clicked
+function startQuiz() {
+    startButton.style.display = "none";
+    questionWrap.style.display = "block";
+    showQuestion();
+    showChoices();
+}
 
 
 function showQuestion() {
