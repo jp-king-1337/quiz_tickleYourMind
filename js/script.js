@@ -160,7 +160,7 @@ function endQuiz() {
     var submitButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
-    scoreText.innerText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
+    scoreText.innerText = "Time's up! Your final score is: " + score + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Initials");
     submitButton.textContent = "Submit"
