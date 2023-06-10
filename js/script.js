@@ -95,6 +95,10 @@ function checkAnswer(event) {
 
     if (selectedChoice === questionDataObj.answer) {
         score++;
+    } else {
+        var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
+        timeLeft -=5;
+        timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
     }
 
     nextQuestion();
