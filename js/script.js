@@ -7,12 +7,11 @@ var timerEl = document.getElementById("timer");
 var nameInput;
 var timerInterval;
 var score = 0;
-
+var timeLeft = 60;
 
 
 startButton.addEventListener("click", startQuiz);
 highScoresButton.addEventListener("click", showHighScores);
-
 questionWrap.style.display = "none";
 
 
@@ -30,11 +29,10 @@ function startQuiz() {
 
 
 function startTimer() {
-    var timeLeft = 60;
-
     timerInterval = setInterval(function () {
         timeLeft--;
-        timerEl.innerText = "TIME LEFT: " + timeLeft + "seconds";
+        timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
+
 
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
@@ -105,11 +103,15 @@ function checkAnswer(event) {
         selectedChoice.className += " correct";
         showResult(selectedChoice, true);
     } else {
-        var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
         timeLeft -= 5;
         timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
         selectedChoice.className += " wrong";
         showResult(selectedChoice, false);
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endQuiz();
+        }
     }
 
     nextQuestion();
@@ -150,8 +152,6 @@ function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
     scoreboardDiv.style.display = "block";
-    
-
     scoreboardDiv.innerHTML = "";
 
     var resultDiv = document.createElement("div");
