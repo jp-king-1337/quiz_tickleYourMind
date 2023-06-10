@@ -100,13 +100,32 @@ function checkAnswer(event) {
 
     if (selectedChoice === questionDataObj.answer) {
         score++;
+        selectedChoice.classList.add("correct");
     } else {
         var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
         timeLeft -= 5;
         timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
+        selectedChoice.classList.add("wrong");
     }
 
+    showResult(selectedChoice === questionDataObj.answer);
     nextQuestion();
+}
+
+
+function showResult(isCorrect) {
+    var resultDiv = document.createElement("div");
+    var resultText = document.createElement("p");
+
+    resultDiv.classList.add("text_center");
+    resultText.innerText = isCorrect ? "Correct!" : "Wrong!";
+
+    resultDiv.appendChild(resultText);
+    questionWrap.appendChild(resultDiv);
+
+    setTimeout(function () {
+        resultDiv.remove();
+    }, 1000);
 }
 
 
