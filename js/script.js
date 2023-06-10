@@ -3,6 +3,10 @@ var startButton = document.getElementById("startButton");
 var quizDescription = document.getElementById("quizDescription");
 var questionWrap = document.getElementById("question_wrap");
 var nextButton = document.getElementById("nextButton");
+var timerEl = document.getElementById("timer");
+
+var timeLeft = 60;
+var timerInterval;
 
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", nextQuestion);
@@ -17,9 +21,23 @@ function startQuiz() {
 
     questionWrap.style.display = "block";
     nextButton.style.display = "block";
-    
+
     showQuestion();
     showChoices();
+    startTimer();
+}
+
+
+function startTimer() {
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        timerEl.innerText = "TIME LEFT: " + timeLeft + "seconds";
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endQuiz();
+        }
+    }, 1000);
 }
 
 
