@@ -55,6 +55,19 @@ header #timer {
     background-color: green;
 }
 
-.button-style.wron {
+.button-style.wrong {
     background-color: red;
+}
+
+.score_table {
+    margin: 0 auto;
+    background-color: aliceblue;
+    border-collapse: collapse;
+    width: 40%;
+}
+
+.score_table tr td {
+    padding: 5%;
+    font-size: 18px;
+    border: 1px solid --myPurple;
 }

@@ -19,6 +19,7 @@ questionWrap.style.display = "none";
 function startQuiz() {
     quizDescription.style.display = "none";
     startButton.style.display = "none";
+    scoreboardDiv.style.display = "none";
 
     questionWrap.style.display = "block";
 
@@ -148,6 +149,8 @@ document.body.appendChild(scoreboardDiv);
 function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
+    scoreboardDiv.style.display = "block";
+    
 
     scoreboardDiv.innerHTML = "";
 
