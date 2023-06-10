@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>JS Quiz</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <h1>Time: 50</h1>
 
-    <div class="choices">
-        <button>One</button>
-        <button>Two</button>
-        <button>Three</button>
-        <Button>Four</Button>
+<body>
+    <header>
+        <button id="highScoresButton">High Scores</button>
+        <div id="timer"></div>
+    </header>
+
+    <h1 class="text_center">JavaScript Fundamentals Quiz</h1>
+
+
+    <div id="quizDescription" class="text_center">
+        <h2>Welcome to my JavaScript Fundamentals Quiz! Test your knowledge of JavaScript and try to answer the
+            questions correctly before time runs out. Good luck!</h2>
+        <button id="startButton">Start Quiz</button>
+    </div>
+
+    <div id="question_wrap" class="text_center">
+        <div id="question">
+            <h2>This is a sample header, to be replaced with JS. The text will be the question.</h2>
+        </div>
+
+        <div id="choices">
+            <p>This is a sample paragraph, to be replaced with JS. The element will be replaced with buttons filled with
+                the choices text.</p>
+        </div>
+
+        <button id="nextButton">Next</button>
     </div>
 
 
+    <script src="js/questions.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>
