@@ -2,3 +2,11 @@
 .text_center {
     text-align: center;
 }
+
+
+/* LOCAL CLASSES */
+#choices li{
+    list-style-type: none;
+    padding: 0;
+    margin: 10px;
+}
