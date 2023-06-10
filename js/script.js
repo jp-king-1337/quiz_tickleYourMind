@@ -139,15 +139,14 @@ function endQuiz() {
 
 
 function saveScore() {
-    // selects the first input element with the type attribute set to text and assigns it variable nameInput
-    var nameInput = document.querySelector("input[type='text']");
-
-    // What in the name of Satan's underpants is this variable doing
-    var initials = nameInput.ariaValueMax;
-    // I'm not sure why I have this score variable, but I'm afraid to take it away just yet. Will check back on it later to see if I have it used anywhere.
-    var score = currentQuestionIndex;
-
-    var scoreObj = { initials: initials, score: score };
+    var initials = nameInput.value;
+    // keep forgetting how this object literal works, so making note:
+    // scoreObj is making a new object for the scores - then before colon setting the labels to store in the object as initials and score - then after colon adding value to the labels
+    // { property: value }
+    var scoreObj = {
+        initials: initials,
+        score: score
+    };
 
     var scores = localStorage.getItem("scores");
     var scoreList;
