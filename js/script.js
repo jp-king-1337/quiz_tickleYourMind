@@ -48,18 +48,26 @@ function startTimer() {
 function showQuestion() {
     var questionEl = document.querySelector("#question");
     questionEl.innerHTML = "";
-    var questionDataObj = questionData[currentQuestionIndex];
-    var questionH2 = document.createElement("h2");
 
-    questionH2.innerText = questionDataObj.question;
-    questionEl.append(questionH2);
+    if (currentQuestionIndex < questionData.length) {
+        var questionDataObj = questionData[currentQuestionIndex];
+        var questionH2 = document.createElement("h2");
+
+        questionH2.innerText = questionDataObj.question;
+        questionEl.append(questionH2);
+    }
 }
 
 
 function nextQuestion() {
     currentQuestionIndex++;
-    showQuestion();
-    showChoices();
+
+    if (currentQuestionIndex < questionData.length) {
+        showQuestion();
+        showChoices();
+    } else {
+        endQuiz();
+    }
 }
 
 
@@ -97,7 +105,7 @@ function checkAnswer(event) {
         score++;
     } else {
         var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
-        timeLeft -=5;
+        timeLeft -= 5;
         timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
     }
 
@@ -119,6 +127,7 @@ function endQuiz() {
     var resultDiv = document.createElement("div");
     var scoreText = document.createElement("p");
     var nameInput = document.createElement("input");
+    var submitButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
     scoreText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
