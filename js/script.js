@@ -2,7 +2,6 @@ var currentQuestionIndex = 0;
 var startButton = document.getElementById("startButton");
 var quizDescription = document.getElementById("quizDescription");
 var questionWrap = document.getElementById("question_wrap");
-var nextButton = document.getElementById("nextButton");
 var highScoresButton = document.getElementById("highScoresButton");
 var timerEl = document.getElementById("timer");
 var timerInterval;
@@ -11,10 +10,8 @@ var score = 0;
 
 
 startButton.addEventListener("click", startQuiz);
-nextButton.addEventListener("click", nextQuestion);
 
 questionWrap.style.display = "none";
-nextButton.style.display = "none";
 
 
 function startQuiz() {
@@ -22,7 +19,6 @@ function startQuiz() {
     startButton.style.display = "none";
 
     questionWrap.style.display = "block";
-    nextButton.style.display = "block";
 
     startTimer();
     showQuestion();
@@ -124,7 +120,6 @@ function applyButtonStyle() {
 function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
-    nextButton.style.display = "none";
 
     var resultDiv = document.createElement("div");
     var scoreText = document.createElement("p");
@@ -164,7 +159,6 @@ function saveScore() {
     scoreList.push(scoreObj);
 
     localStorage.setItem("scores", JSON.stringify(scoreList));
-
 }
 
 
