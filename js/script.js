@@ -16,6 +16,13 @@ function startQuiz() {
 }
 
 
+function nextQuestion() {
+    currentQuestionIndex++;
+    showQuestion();
+    showChoices();
+}
+
+
 function showQuestion() {
     var questionEl = document.querySelector("#question");
     questionEl.innerHTML = "";
