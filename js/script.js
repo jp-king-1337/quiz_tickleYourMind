@@ -11,6 +11,7 @@ var score = 0;
 
 
 startButton.addEventListener("click", startQuiz);
+highScoresButton.addEventListener("click", showHighScores);
 
 questionWrap.style.display = "none";
 
@@ -194,6 +195,46 @@ function saveScore() {
     localStorage.setItem("scores", JSON.stringify(scoreList));
 
     nameInput.value = "";
+
+    showHighScores();
+}
+
+
+function showHighScores() {
+    scoreboardDiv.innerHTML = "";
+    var scores = localStorage.getItem("scores");
+    var scoreList;
+
+    if (scores) {
+        scoreList = JSON.parse(scores);
+
+        var highScoresTitle = document.createElement("h2");
+        highScoresTitle.innerText = "High Scores";
+        scoreboardDiv.appendChild(highScoresTitle);
+
+        var scoreTable = document.createElement("table");
+        scoreTable.classList.add("score_table");
+
+        var tableHeaderRow = document.createElement("tr");
+        var initialsHeader = document.createElement("th");
+        var scoreHeader = document.createElement("th");
+        initialsHeader.innerText = "Initials";
+        scoreHeader.innerText = "Score";
+        tableHeaderRow.append(initialsHeader, scoreHeader);
+        scoreTable.appendChild(tableHeaderRow);
+
+        scoreList.forEach(function (scoreObj) {
+            var tableRow = document.createElement("tr");
+            var initialsData = document.createElement("td");
+            var scoreData = document.createElement("td");
+            initialsData.innerText = scoreObj.initials;
+            scoreData.innerText = scoreObj.score;
+            tableRow.append(initialsData, scoreData);
+            scoreTable.appendChild(tableRow);
+        });
+
+        scoreboardDiv.appendChild(scoreTable);
+    }
 }
 
 
