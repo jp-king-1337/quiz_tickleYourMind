@@ -116,13 +116,18 @@ function applyButtonStyle() {
 }
 
 
+var scoreboardDiv = document.createElement("div");
+scoreboardDiv.id = "scoreboard";
+scoreboardDiv.classList.add("text_center");
+document.body.appendChild(scoreboardDiv);
+
+
 // STOP REMOVING THE SUBMIT BUTTON YOU DUMMY
 // It's there to submit score info, not to end the quiz.
 function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
 
-    var scoreboardDiv = document.getElementById("scoreboard");
     scoreboardDiv.innerHTML = "";
 
     var resultDiv = document.createElement("div");
@@ -133,7 +138,7 @@ function endQuiz() {
     resultDiv.classList.add("text_center");
     scoreText.innerText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
-    nameInput.setAttribute("placeholder", "Enter Your Name");
+    nameInput.setAttribute("placeholder", "Enter Your Initials");
     submitButton.textContent = "Submit"
     submitButton.addEventListener("click", saveScore);
 
