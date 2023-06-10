@@ -95,25 +95,25 @@ function showChoices() {
 
 
 function checkAnswer(event) {
-    var selectedChoice = event.target.innerText;
+    var selectedChoice = event.target;
     var questionDataObj = questionData[currentQuestionIndex];
 
-    if (selectedChoice === questionDataObj.answer) {
+    if (selectedChoice.innerText === questionDataObj.answer) {
         score++;
-        selectedChoice.classList.add("correct");
+        selectedChoice.className += " correct";
+        showResult(selectedChoice, true);
     } else {
         var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
         timeLeft -= 5;
         timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
-        selectedChoice.classList.add("wrong");
+        selectedChoice.className += " wrong";
+        showResult(selectedChoice, false);
     }
 
-    showResult(selectedChoice === questionDataObj.answer);
     nextQuestion();
 }
 
-
-function showResult(isCorrect) {
+function showResult(selectedChoice, isCorrect) {
     var resultDiv = document.createElement("div");
     var resultText = document.createElement("p");
 
@@ -127,6 +127,7 @@ function showResult(isCorrect) {
         resultDiv.remove();
     }, 1000);
 }
+
 
 
 function applyButtonStyle() {
@@ -163,6 +164,12 @@ function endQuiz() {
 
     resultDiv.append(scoreText, nameInput, submitButton);
     scoreboardDiv.append(resultDiv);
+
+    nameInput.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            saveScore();
+        }
+    });
 }
 
 
@@ -185,7 +192,11 @@ function saveScore() {
     scoreList.push(scoreObj);
 
     localStorage.setItem("scores", JSON.stringify(scoreList));
+
+    nameInput.value = "";
 }
+
+
 
 
 showQuestion();
