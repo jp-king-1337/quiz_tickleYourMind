@@ -89,7 +89,9 @@ function showChoices() {
 }
 
 
-
+// function checkAnswer(event) {
+//     var selectedChoice 
+// }
 
 
 function applyButtonStyle() {
