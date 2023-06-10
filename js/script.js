@@ -3,10 +3,12 @@ var startButton = document.getElementById("startButton");
 var quizDescription = document.getElementById("quizDescription");
 var questionWrap = document.getElementById("question_wrap");
 var nextButton = document.getElementById("nextButton");
+var highScoresButton = document.getElementById("highScoresButton");
 var timerEl = document.getElementById("timer");
-
-var timeLeft = 60;
 var timerInterval;
+var score = 0;
+
+
 
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", nextQuestion);
@@ -22,14 +24,16 @@ function startQuiz() {
     questionWrap.style.display = "block";
     nextButton.style.display = "block";
 
+    startTimer();
     showQuestion();
     showChoices();
-    startTimer();
 }
 
 
 function startTimer() {
-    timerInterval = setInterval(function() {
+    var timeLeft = 60;
+
+    timerInterval = setInterval(function () {
         timeLeft--;
         timerEl.innerText = "TIME LEFT: " + timeLeft + "seconds";
 
@@ -74,6 +78,7 @@ function showChoices() {
 
         btn.innerText = choice;
         btn.classList.add("button-style");
+        btn.addEventListener("click", checkAnswer);
 
         listItem.appendChild(btn);
         choicesList.appendChild(listItem);
@@ -84,9 +89,21 @@ function showChoices() {
 }
 
 
+
+
+
 function applyButtonStyle() {
     var startButton = document.getElementById("startButton");
     startButton.classList.add("button-style");
+}
+
+
+function endQuiz() {
+    clearInterval(timerInterval);
+    questionWrap.style.display = "none";
+    nextButton.style.display = "none";
+
+
 }
 
 
