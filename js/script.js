@@ -45,13 +45,6 @@ function startTimer() {
 }
 
 
-function nextQuestion() {
-    currentQuestionIndex++;
-    showQuestion();
-    showChoices();
-}
-
-
 function showQuestion() {
     var questionEl = document.querySelector("#question");
     questionEl.innerHTML = "";
@@ -60,6 +53,13 @@ function showQuestion() {
 
     questionH2.innerText = questionDataObj.question;
     questionEl.append(questionH2);
+}
+
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    showQuestion();
+    showChoices();
 }
 
 
@@ -125,7 +125,7 @@ function endQuiz() {
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Name");
 
-    resultDiv.append(scoreText, nameInput, submitButton);
+    resultDiv.append(scoreText, nameInput);
     quizDescription.append(resultDiv);
 }
 
