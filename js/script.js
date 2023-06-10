@@ -141,6 +141,8 @@ function endQuiz() {
 function saveScore() {
     // selects the first input element with the type attribute set to text and assigns it variable nameInput
     var nameInput = document.querySelector("input[type='text']");
+
+    // What in the name of Satan's underpants is this variable doing
     var initials = nameInput.ariaValueMax;
     // I'm not sure why I have this score variable, but I'm afraid to take it away just yet. Will check back on it later to see if I have it used anywhere.
     var score = currentQuestionIndex;
