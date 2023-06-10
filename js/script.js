@@ -158,18 +158,15 @@ function endQuiz() {
     var scoreText = document.createElement("p");
     nameInput = document.createElement("input");
     var submitButton = document.createElement("button");
-    var playAgainButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
     scoreText.innerText = "Time's up! Your final score is: " + score + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Initials");
     submitButton.innerText = "Submit"
-    playAgainButton.innerText = "Play Again";
     submitButton.addEventListener("click", saveScore);
-    playAgainButton.addEventListener("click", playAgain);
 
-    resultDiv.append(scoreText, nameInput, submitButton, playAgainButton);
+    resultDiv.append(scoreText, nameInput, submitButton);
     scoreboardDiv.append(resultDiv);
 
     nameInput.addEventListener("keyup", function (event) {
@@ -177,15 +174,25 @@ function endQuiz() {
             saveScore();
         }
     });
+
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+        playAgainButton.remove();
+    }
 }
 
 
 function playAgain() {
     currentQuestionIndex = 0;
     score = 0;
-    timeLeft =60;
+    timeLeft = 60;
     scoreboardDiv.style.display = "none";
     questionWrap.style.display = "block";
+    
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+        playAgainButton.remove();
+    }
     startQuiz();
 }
 
@@ -213,6 +220,15 @@ function saveScore() {
     nameInput.value = "";
 
     showHighScores();
+
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (!playAgainButton) {
+        playAgainButton = document.createElement("button");
+        playAgainButton.id = "playAgainButton";
+        playAgainButton.innerText = "PLAY AGAIN";
+        playAgainButton.addEventListener("click", playAgain);
+        document.body.append(playAgainButton)
+    }
 }
 
 
