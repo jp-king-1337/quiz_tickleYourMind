@@ -89,9 +89,16 @@ function showChoices() {
 }
 
 
-// function checkAnswer(event) {
-//     var selectedChoice 
-// }
+function checkAnswer(event) {
+    var selectedChoice = event.target.innerText;
+    var questionDataObj = questionData[currentQuestionIndex];
+
+    if (selectedChoice === questionDataObj.answer) {
+        score++;
+    }
+
+    nextQuestion();
+}
 
 
 function applyButtonStyle() {
@@ -113,15 +120,33 @@ function endQuiz() {
     scoreText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Name");
-    submitButton.innerText = "Submit";
-    submitButton.addEventListener("click", saveScore);
 
     resultDiv.append(scoreText, nameInput, submitButton);
     quizDescription.append(resultDiv);
 }
 
 
+function saveScore() {
+    var nameInput = document.querySelector("input[type='text']");
+    var initials = nameInput.ariaValueMax;
+    var score = currentQuestionIndex;
 
+    var scoreObj = { initials: initials, score: score };
+
+    var scores = localStorage.getItem("scores");
+    var scoreList;
+
+    if (scores) {
+        scoreList = JSON.parse(scores);
+    } else {
+        scoreList = [];
+    }
+
+    scoreList.push(newScore);
+
+    localStorage.setItem("scores", JSON.stringify(scoreList));
+
+}
 
 
 showQuestion();
