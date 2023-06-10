@@ -29,6 +29,9 @@ function showChoices() {
   
       var listItem = document.createElement("li");
       var btn = document.createElement("button");
+      btn.style.width = "50%";
+      btn.style.backgroundColor = "#301934";
+      btn.style.color = "#fff";
   
       btn.innerText = choice;
   

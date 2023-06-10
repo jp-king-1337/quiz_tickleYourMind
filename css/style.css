@@ -14,3 +14,7 @@
 #choices li button {
     padding: 5px;
 }
+
+button.choice {
+    width: 100%;
+}
