@@ -1,10 +1,37 @@
-/* GLOBAL CLASSES */
+:root {
+--myPurple: #301934;
+}
+
+/* GLOBAL STYLES */
 .text_center {
     text-align: center;
 }
 
 
-/* LOCAL CLASSES */
+/* HEADER STYLES */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+header #highScoresButton {
+    background-color: var(--myPurple);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+header #timer {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* LOCAL STYLES */
 #choices li{
     list-style-type: none;
     padding: 0;
@@ -14,7 +41,7 @@
 .button-style,
 #startButton {
     width: 50%;
-    background-color: #301934;
+    background-color: var(--myPurple);
     color: #fff;
     padding: 5px;
 }
