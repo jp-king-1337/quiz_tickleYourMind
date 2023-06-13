@@ -104,16 +104,17 @@ function checkAnswer(event) {
         selectedChoice.className += " correct";
         showResult(selectedChoice, true);
     } else {
-        timeLeft -= 5;
-        timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
         selectedChoice.className += " wrong";
         showResult(selectedChoice, false);
-
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            endQuiz();
-        }
     }
+
+    timeLeft -= 5;
+    if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        endQuiz();
+    }
+
+    timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
 
     nextQuestion();
 }
