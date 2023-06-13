@@ -22,7 +22,7 @@ header #highScoresButton {
     color: #fff;
     border: none;
     padding: 5px 10px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
 }
 
@@ -39,22 +39,67 @@ header #timer {
     margin: 10px;
 }
 
-.button-style,
-#startButton {
+.standard_button {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    background-color: var(--myPurple);
+    color: #fff;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.button_style {
     width: 50%;
     background-color: var(--myPurple);
     color: #fff;
     padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#highScoresButton {
+    background-color: var(--myPurple);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 #startButton {
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.centered_button {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
     width: fit-content;
 }
 
 .button-style.correct {
+    border-radius: 10px;
     background-color: green;
 }
 
-.button-style.wron {
+.button-style.wrong {
+    border-radius: 10px;
     background-color: red;
+}
+
+.score_table {
+    margin: 0 auto;
+    background-color: aliceblue;
+    border-collapse: collapse;
+    width: 40%;
+}
+
+.score_table tr td {
+    padding: 5%;
+    font-size: 18px;
+    border: 1px solid --myPurple;
 }

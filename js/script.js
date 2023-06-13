@@ -7,17 +7,19 @@ var timerEl = document.getElementById("timer");
 var nameInput;
 var timerInterval;
 var score = 0;
+var timeLeft = 60;
 
 
 
 startButton.addEventListener("click", startQuiz);
-
+highScoresButton.addEventListener("click", showHighScores);
 questionWrap.style.display = "none";
 
 
 function startQuiz() {
     quizDescription.style.display = "none";
     startButton.style.display = "none";
+    scoreboardDiv.style.display = "none";
 
     questionWrap.style.display = "block";
 
@@ -28,11 +30,10 @@ function startQuiz() {
 
 
 function startTimer() {
-    var timeLeft = 60;
-
     timerInterval = setInterval(function () {
         timeLeft--;
-        timerEl.innerText = "TIME LEFT: " + timeLeft + "seconds";
+        timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
+
 
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
@@ -82,7 +83,7 @@ function showChoices() {
         var btn = document.createElement("button");
 
         btn.innerText = choice;
-        btn.classList.add("button-style");
+        btn.classList.add("button_style");
         btn.addEventListener("click", checkAnswer);
 
         listItem.appendChild(btn);
@@ -103,12 +104,17 @@ function checkAnswer(event) {
         selectedChoice.className += " correct";
         showResult(selectedChoice, true);
     } else {
-        var timeLeft = parseInt(timerEl.innerText.split(" ")[2]);
-        timeLeft -= 5;
-        timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
         selectedChoice.className += " wrong";
         showResult(selectedChoice, false);
     }
+
+    timeLeft -= 5;
+    if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        endQuiz();
+    }
+
+    timerEl.innerText = "TIME LEFT: " + timeLeft + " seconds";
 
     nextQuestion();
 }
@@ -132,7 +138,7 @@ function showResult(selectedChoice, isCorrect) {
 
 function applyButtonStyle() {
     var startButton = document.getElementById("startButton");
-    startButton.classList.add("button-style");
+    startButton.classList.add("button_style");
 }
 
 
@@ -147,7 +153,7 @@ document.body.appendChild(scoreboardDiv);
 function endQuiz() {
     clearInterval(timerInterval);
     questionWrap.style.display = "none";
-
+    scoreboardDiv.style.display = "block";
     scoreboardDiv.innerHTML = "";
 
     var resultDiv = document.createElement("div");
@@ -156,10 +162,11 @@ function endQuiz() {
     var submitButton = document.createElement("button");
 
     resultDiv.classList.add("text_center");
-    scoreText.innerText = "Time's up! Your final score is: " + currentQuestionIndex + "/" + questionData.length;
+    scoreText.innerText = "Time's up! Your final score is: " + score + "/" + questionData.length;
     nameInput.setAttribute("type", "text");
     nameInput.setAttribute("placeholder", "Enter Your Initials");
-    submitButton.textContent = "Submit"
+    submitButton.innerText = "Submit";
+    submitButton.classList.add("standard_button");
     submitButton.addEventListener("click", saveScore);
 
     resultDiv.append(scoreText, nameInput, submitButton);
@@ -170,6 +177,26 @@ function endQuiz() {
             saveScore();
         }
     });
+
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+        playAgainButton.remove();
+    }
+}
+
+
+function playAgain() {
+    currentQuestionIndex = 0;
+    score = 0;
+    timeLeft = 60;
+    scoreboardDiv.style.display = "none";
+    questionWrap.style.display = "block";
+
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+        playAgainButton.remove();
+    }
+    startQuiz();
 }
 
 
@@ -194,11 +221,90 @@ function saveScore() {
     localStorage.setItem("scores", JSON.stringify(scoreList));
 
     nameInput.value = "";
+
+    showHighScores();
+
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (!playAgainButton) {
+        playAgainButton = document.createElement("button");
+        playAgainButton.id = "playAgainButton";
+        playAgainButton.innerText = "PLAY AGAIN";
+        playAgainButton.classList.add("button_style");
+        playAgainButton.classList.add("centered_button");
+        playAgainButton.addEventListener("click", playAgain);
+        document.body.append(playAgainButton)
+    }
 }
 
 
+function showHighScores() {
+    scoreboardDiv.innerHTML = "";
+    var scores = localStorage.getItem("scores");
+    var scoreList;
+
+    if (scores) {
+        scoreList = JSON.parse(scores);
+
+        var highScoresTitle = document.createElement("h2");
+        highScoresTitle.innerText = "High Scores";
+        scoreboardDiv.appendChild(highScoresTitle);
+
+        var scoreTable = document.createElement("table");
+        scoreTable.classList.add("score_table");
+
+        var tableHeaderRow = document.createElement("tr");
+        var initialsHeader = document.createElement("th");
+        var scoreHeader = document.createElement("th");
+        initialsHeader.innerText = "Initials";
+        scoreHeader.innerText = "Score";
+        tableHeaderRow.append(initialsHeader, scoreHeader);
+        scoreTable.appendChild(tableHeaderRow);
+
+        scoreList.forEach(function (scoreObj) {
+            var tableRow = document.createElement("tr");
+            var initialsData = document.createElement("td");
+            var scoreData = document.createElement("td");
+            initialsData.innerText = scoreObj.initials;
+            scoreData.innerText = scoreObj.score;
+            tableRow.append(initialsData, scoreData);
+            scoreTable.appendChild(tableRow);
+        });
+
+        scoreboardDiv.appendChild(scoreTable);
+    } else {
+        var noScores = document.createElement("h2");
+        noScores.innerText = "No high scores yet! Click the 'Start Quiz' button above to play a round and see how you do!";
+        scoreboardDiv.appendChild(noScores);
+    }
+}
+
+
+function setButtonStandardStyling() {
+    var buttons = document.getElementsByTagName("button");
+
+    for (var i = 0; i < buttons.length; i++) {
+        var button = buttons[i];
+
+        if (button.id !== "highScoresButton") {
+            button.classList.add("standard_button");
+        }
+    }
+}
+
+function setChoicesButtonStyling() {
+    var listItems = document.querySelectorAll("li");
+
+    for (var i = 0; i < listItems.length; i++) {
+        var listItem = listItems[i];
+        var button = listItem.querySelector("button");
+
+        button.classList.add("choice_button");
+    }
+}
 
 
 showQuestion();
 showChoices();
 applyButtonStyle();
+setButtonStandardStyling();
+setChoicesButtonStyling();
