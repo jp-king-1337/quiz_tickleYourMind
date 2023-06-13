@@ -271,6 +271,10 @@ function showHighScores() {
         });
 
         scoreboardDiv.appendChild(scoreTable);
+    } else {
+        var noScores = document.createElement("h2");
+        noScores.innerText = "No high scores yet! Click the 'Start Quiz' button above to play a round and see how you do!";
+        scoreboardDiv.appendChild(noScores);
     }
 }
 
