@@ -27,7 +27,12 @@ This project is to be graded as part of my participation in the Rutgers Coding B
 [Deployed Link](https://jp-king-1337.github.io/quiz_tickleYourMind/)
 
 
-![initial view to the page](https://github.com/jp-king-1337/JP_password_maker/blob/main/screenshots/Screenshot%202023-06-01%20at%2010.12.15%20PM.png?raw=true)
+![initial view of the page](https://github.com/jp-king-1337/quiz_tickleYourMind/blob/main/screenshots/screenshotOnLoad.png?raw=true)
+![if high scores is clicked on initial view, with empty local storage](https://github.com/jp-king-1337/quiz_tickleYourMind/blob/main/screenshots/screenshotNoScores.png?raw=true)
+![a question](https://github.com/jp-king-1337/quiz_tickleYourMind/blob/main/screenshots/screenshotQuestion.png?raw=true)
+![once the quiz has ended, user is asked to save their score](https://github.com/jp-king-1337/quiz_tickleYourMind/blob/main/screenshots/screenshotEndQuiz.png?raw=true)
+![once user saves, high scores display](https://github.com/jp-king-1337/quiz_tickleYourMind/blob/main/screenshots/screenshotEndScores.png?raw=true)
+![if scores are saved in local storage and page is reloaded, this will display when user clicks high scores button](https://github.com/jp-king-1337/quiz_tickleYourMind/blob/main/screenshots/screenshotLoadScores.png?raw=true)
 
 
 ## Credits
